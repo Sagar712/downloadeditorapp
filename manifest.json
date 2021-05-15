@@ -1,0 +1,17 @@
+{
+    "name":"Edit Rich text",
+    "short_name":"Edit app",
+    "start_url":".",
+    "background_color":"rgb(0, 119, 119)",
+    "theme_color":"aqua",
+    "display":"standalone",
+    "icons":[
+        {
+            "src":"./Screenshot.png",
+            "sizes":"512x512",
+            "type":"image/png"
+        }
+        
+    ]
+
+}

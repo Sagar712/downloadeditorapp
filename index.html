@@ -10,7 +10,6 @@
       integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
       crossorigin="anonymous"
     />
-    <link rel="manifest" href="./manifest.json">
     <link rel="shortcut icon" href="./Screenshot.png" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
     <title>Text Editor</title>
@@ -18,7 +17,16 @@
 <body>
 
     <header>
-		<div class="logo"><i class="fas fa-pen-fancy"></i> Create Text <sub style="font-size: 0.7rem;font-style: italic;"> by Sagar</sub></div>
+		<div class="logo"><button class="saveBtn" onclick="newFile()" title="Data gets saved to local storage" style="background-color: rgb(255, 213, 159);">New</button>
+
+            <button class="saveBtn" onclick="openPopup()" title="Data gets saved to local storage">Save</button>
+            <div class="selectOption">
+                <select name="items" id="textItems" onchange="printOption()">
+                    
+                </select>
+            </div>
+            <div class="pushinto"></div>
+        </div>
 
 		<div class="menuitems2">
 
@@ -45,14 +53,19 @@
         
     </div>
 	<div class="nextoverlay" onclick="popupmenu()"></div>
-
+    
+    <div class="toastNotify">
+        
+    </div>
 
     <div class="container">
         <button class="btn" data-element="bold" title="Bold"><i class="fas fa-bold"></i></button>
 
         <button class="btn" data-element="italic" title="italic"><i class="fas fa-italic"></i></button>
 
-        <button class="btn" data-element="foreColor" title="change color to yellow"><i class="fas fa-palette"></i></button>
+        <button class="btn" data-element="underline" title="underline"><i class="fas fa-underline"></i></i></button>
+        
+        <button class="btn" data-element="foreColor" title="change color to yellow" style="color: white;"><i class="fas fa-palette"></i></button>
 
         <button class="btn" data-element="fontSize" title="increase font size"><i class="fas fa-text-height"></i></button>
 
@@ -60,18 +73,32 @@
 
         <button class="btn" data-element="insertOrderedList" title="Ordered list"><i class="fas fa-list-ol"></i></button>
 
+        <button class="btn" data-element="undo" title="Undo"><i class="fas fa-undo-alt"></i></button>
+
         <button class="btn" data-element="indent" title="Left indentation"><i class="fas fa-indent"></i></button>
 
-        <button class="saveBtn" onclick="savedata()" title="Data gets saved to local machine">Save</button>
+        <button class="btn" data-element="outdent" title="Right indentation"><i class="fas fa-outdent"></i></button>
+
+        
+        
     </div>
     <pre class="content" contenteditable="true"></pre>
 
-    <!--
-        <div class="content" contenteditable="true">
-        <pre id="maincontent"></pre>
+    <div class="savepopup">
+        <p>Save as temporary file</p>
+        <button onclick="savedata()">Save</button>
+        <p>Or enter name to save permanent file</p>
+        <input type="text" class="filename">
+        <button onclick="saveSpecificData()">Save</button>
+        
+    </div>
+    <div class="confirmpopup">
+        <p>Changes saved !</p>
+        <button onclick="closeSpecific2()">OK</button>
     </div>
 
-    -->
+    <div class="overlay" onclick="closeSpecific()"></div>
+    <div class="overlay2" onclick="closeSpecific2()"></div>
 
     <script src="./main.js"></script>
 </body>

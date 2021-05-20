@@ -1,8 +1,32 @@
 const inputDial = document.querySelector(".inputFile");
+console.log(sessionStorage.getItem('currentFile'));
+let filename = "TextEditorBackup.html";
+let htmlData = localStorage.getItem('textData');
+if(sessionStorage.getItem('currentFile') == "NONE"){
+    //document.getElementById('exportName').innerText = sessionStorage.getItem('currentFile');
+}
+else{
+    const allclas = document.querySelectorAll('.exportName'); 
+    allclas.forEach(item1 => {
+        item1.innerText = sessionStorage.getItem('currentFile');
+    }); 
+    filename = sessionStorage.getItem('currentFile')+".html";
+    const filename2 = sessionStorage.getItem('currentFile');
+    let AllTextItems = JSON.parse(localStorage.getItem('AllTextItems'));
+    let i=1;
+    
+    while(AllTextItems[i]!=null){
+        //console.log(filename + " <--> " + AllTextItems[i].name);
+        if(filename2 === AllTextItems[i].name){
+            htmlData = AllTextItems[i].data;
+            break;
+        }
+        i++;
+    }
+}
 
 function importHandle() {
     inputDial.click();
-    
 }
 inputDial.addEventListener('change', function(e){
     console.log(inputDial.files);
@@ -63,7 +87,7 @@ function exportFile() {
     <body>
         <pre style="color: white;"><!-------------------------------------------------------->`);
 
-    const htmlData = localStorage.getItem('textData');
+    
     fullString = fullString.concat(htmlData);
     
     fullString = fullString.concat(`<!--------------------------------------------------------></pre>
@@ -72,7 +96,8 @@ function exportFile() {
     
     
     console.log(fullString);
-    download(fullString, "TextEditorBackup.html", "text/plain");
+    download(fullString, filename, "text/plain");
+    //"TextEditorBackup.html"
 }
 
 

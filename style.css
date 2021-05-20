@@ -18,7 +18,7 @@ header{
     width: 100vw;
     font-family: 'Roboto', sans-serif;
     height: 3.5rem;
-    background-color: rgb(0, 119, 119);
+    background-color: rgb(46, 46, 46);
     color: rgb(255, 255, 255);
     display: flex;
     justify-content: space-between;
@@ -31,8 +31,21 @@ header{
 }
 
 .logo{
-    margin-left: 5rem;
+    margin-left: 0rem;
     font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+}
+
+.selectOption select{
+    height: 2rem;
+    width: 6rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    margin-left: 0.5rem;
+    background-color: rgb(255, 205, 233);
     font-weight: bold;
 }
 
@@ -80,7 +93,6 @@ header{
     position: sticky;
     top: 0rem;
     z-index: 990;
-    margin-top: 0.7rem;
     height: 3rem;
     display: flex;
     align-items: center;
@@ -89,13 +101,14 @@ header{
     border-bottom: 1px solid grey;
 }
 .content, .contentOut{
-    min-height: 70vh;
+    min-height: 75.8vh;
     width: 97.7%;
     align-self: center;
     font-size: 1.1rem;
     background-color: rgb(63, 63, 63);
     color: white;
     margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
     padding: 0.5rem;
     outline: none;
     border-radius: 5px;
@@ -104,20 +117,17 @@ header{
     cursor: pointer;
     height: 2rem;
     width: 2rem;
-    background-color: aqua;
-    outline: none;
+    background-color: rgb(0, 236, 236);
     border: none;
+    outline: none;
     font-weight: bold;
     font-size: 1rem;
-    margin-left: 0.5rem;
+    margin-left: 0.225rem;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.btn:active{
-    background-color: rgb(0, 223, 223);
-    transform:scale(0.95);
-}
 
-.btn.active{
+
+.btn:active{
     background-color: rgb(0, 179, 179);
 }
 .saveBtn{
@@ -145,9 +155,159 @@ pre{
     word-wrap: break-word;
 }
 
+.savepopup{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 139, 139);
+    width: 20rem;
+    height: 10rem;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 7px;
+    z-index: 1000;
+}
+.confirmpopup{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 139, 139);
+    width: 20rem;
+    height: 10rem;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 7px;
+    z-index: 1000;
+    font-size: 1.2rem;
+}
+.confirmpopup button{
+    width: 4rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    outline: none;
+}
+.confirmpopup button:active{
+    background-color: rgb(160, 160, 160);
+}
+.savepopup.active, .confirmpopup.active{
+    display: flex;
+}
+.savepopup p, .confirmpopup p{
+    color: white;
+}
+.savepopup button{
+    width: 4rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    outline: none;
+}
+.savepopup button:active{
+    background-color: grey;
+}
+
+.savepopup input{
+    height: 2rem;
+    border-radius: 5px;
+    border: none;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+.overlay, .overlay2{
+    position: fixed;
+    visibility: hidden;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.801);
+    z-index: 999;
+}
+.overlay.active, .overlay2.active{
+    visibility: visible;
+}
+
+.toastNotify{
+    position: fixed;
+    top: -5rem;
+    left: 0.5rem;
+    height: 2.5rem;
+    min-width: 7rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: rgb(175, 255, 206);
+    border-radius: 5px;
+    z-index: 1000;
+    border: 2px solid rgb(0, 0, 0);
+
+}
+
+.toastNotify.animate{
+    animation: popping 4s forwards ease;
+}
+
+@keyframes popping {
+    0%{
+        top: -5rem;
+    }
+    10%{
+        top: 0.5rem;
+    }
+    90%{
+        top: 0.5rem;
+    }
+    100%{
+        top: -5rem;
+    }
+}
+
+.delbtn{
+    background-color: rgb(160, 0, 0);
+    height: 1.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0.5rem;
+    border-radius: 5px;
+    border: 2px solid rgb(236, 174, 163);
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    user-select: none;
+}
+.delbtn:active{
+    background-color: rgb(243, 0, 0);
+}
+
 @media screen and (max-width:930px)  {
     .logo{
-        margin-left: 1rem;
+        margin-left: 0rem;
         font-size: 1.3rem;
     }
     .menuitems2{
@@ -193,12 +353,14 @@ pre{
         margin-bottom: 0.9rem;
     }
     .menuitems button:active{
-        background-color: rgb(63, 0, 0);
+        background-color: rgb(0, 151, 151);
     }
     .backBtn{
         display: none;
     }
-
+    .selectOption select{
+        width: 5;
+    }
     .nextoverlay{
         position: fixed;
         bottom: 0;
@@ -219,6 +381,26 @@ pre{
 
     .bar{
         display: flex;
+    }
+    .toastNotify{
+        position: fixed;
+        top: -5rem;
+        left: 0.5rem;
+        right: 0.5rem;
+        height: 2.5rem;
+        min-width: 7rem;
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        font-weight: bold;
+        background-color: rgb(175, 255, 206);
+        border-radius: 5px;
+        z-index: 1000;
+        border: 2px solid rgb(0, 0, 0);
+    
     }
     .menubtn-bar{
         display: flex;
@@ -251,6 +433,6 @@ pre{
         width: 91%;
     }
     .saveBtn{
-        width: 4rem;
+        width: 3.2rem;
     }
 }

@@ -10,6 +10,7 @@ if("serviceWorker" in navigator){
 }
 
 
+
 let num1 = 0;
 function popupmenu() {
     let rotater = document.querySelector(".menubtn-bar");

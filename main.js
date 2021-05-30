@@ -1,3 +1,16 @@
+if("serviceWorker" in navigator){
+    navigator.serviceWorker.register("sw.js").then(
+        registration => {
+            console.log("SW registered");
+            console.log(registration);
+        }
+    ).catch(error => {
+        console.log("SW failed");
+    })
+}
+
+
+
 let num1 = 0;
 function popupmenu() {
     let rotater = document.querySelector(".menubtn-bar");
@@ -20,10 +33,63 @@ function popupmenu() {
     }  
 }
 
-// heaader till this. Add code next to this.
+// header till this. Add code next to this.
 
 // green faint:-  rgb(175, 255, 206)
 sessionStorage.setItem("currentFile", "NONE");
+if(localStorage.getItem('ThemeOfTestApp') == null){
+    localStorage.setItem('ThemeOfTestApp', 'Dark');
+}
+
+function changeMode() {
+    const content = document.querySelector('.content');
+    document.querySelector('header').classList.toggle('light')
+    content.classList.toggle('light');
+    const fonts = document.querySelectorAll('font');
+    if(content.classList.value == "content light"){
+        localStorage.setItem('ThemeOfTestApp', 'Light');
+        fonts.forEach(font => {
+            if(font.color == "#fdff70"){
+                font.color = "#00BDC3";
+            }
+        });
+    }
+    else{
+        localStorage.setItem('ThemeOfTestApp', 'Dark');
+        fonts.forEach(font => { 
+            if(font.color == "#00BDC3"){
+                font.color = "#fdff70";
+            }
+        });
+    }
+    console.log(localStorage.getItem('ThemeOfTestApp'));
+    popupmenu();
+}
+
+function ThemeSetter() {
+    const content = document.querySelector('.content');
+    const fonts = document.querySelectorAll('font');
+    if(localStorage.getItem('ThemeOfTestApp')==null);
+    else if(localStorage.getItem('ThemeOfTestApp') == 'Light'){
+        document.querySelector('header').classList.add('light')
+        content.classList.add('light');
+        fonts.forEach(font => {
+            if(font.color == "#fdff70"){
+                font.color = "#00BDC3";
+            }
+        });
+    }
+    else if(localStorage.getItem('ThemeOfTestApp') == 'Dark'){
+        document.querySelector('header').classList.remove('light')
+        content.classList.remove('light');
+        fonts.forEach(font => { 
+            if(font.color == "#00BDC3"){
+                font.color = "#fdff70";
+            }
+        });
+    }
+}
+
 
 function printOption() {
     const filename = document.getElementById('textItems').value;
@@ -41,8 +107,10 @@ function printOption() {
         i++;
     }
     document.querySelector('.pushinto').innerHTML = 
-    `<div class="delbtn" onclick="DeleteItem('${filename}')"> Delete "${filename}" </div>`
-    
+    `<div class="delbtn" onclick="DeleteItem('${filename}')"> Delete </div>`;
+
+    ThemeSetter();
+
 }
 
 function DeleteItem(itemName) {
@@ -83,7 +151,7 @@ function animatToast(msg, bgColor) {
     toastNote.classList.add('animate');
     setTimeout(() => {
         toastNote.classList.remove('animate');
-    }, 2000);
+    }, 1500);
     //console.log(firsttime+" "+toastNote.classList);
 }
 
@@ -119,15 +187,21 @@ let color = 0;
 allbtns.forEach(butn => {
     butn.addEventListener('click', () => {
         let command = butn.dataset['element'];
+        let colorOfPallete = "#fdff70";
+        let colorOfFont = "white";
+        if(localStorage.getItem('ThemeOfTestApp') == 'Light'){
+            colorOfPallete = "#00BDC3"
+            colorOfFont = "black";
+        }
         if(command == 'foreColor'){
             if(color == 0){
-                document.execCommand(command, false, 'rgb(253, 255, 112)');
-                butn.style.color = 'yellow';
+                document.execCommand(command, false, colorOfPallete);
+                butn.style.color = colorOfPallete;
                 color = 1;
             }
             else{
-                document.execCommand(command, false, 'white');
-                butn.style.color = 'white';
+                document.execCommand(command, false, colorOfPallete);
+                butn.style.color = colorOfFont;
                 color = 0;
             }
             
@@ -189,13 +263,31 @@ function closeSpecific2() {
     animatToast("Changes saved !", "rgb(175, 255, 206)");
 }
 function savedata() {
+    const fonts = document.querySelectorAll('font');
+    fonts.forEach(font => { 
+        if(font.color == "#00BDC3"){
+            font.color = "#fdff70";
+        }
+    });
     const source = document.querySelector('.content').innerHTML;
     localStorage.setItem('textData', source);
+    fonts.forEach(font => { 
+        if(font.color == "#fdff70"){
+            font.color = "#00BDC3";
+        }
+    });
     openPopup();
     animatToast("Temp file saved !", "rgb(175, 255, 206)");
+    renderer()
 }
 
 function saveSpecificData() {
+    const fonts = document.querySelectorAll('font');
+    fonts.forEach(font => { 
+        if(font.color == "#00BDC3"){
+            font.color = "#fdff70";
+        }
+    });
     const filename = document.querySelector('.filename').value;
     const source = document.querySelector('.content').innerHTML;
     let i =1;
@@ -224,6 +316,11 @@ function saveSpecificData() {
         console.log(allFilesData);
         localStorage.setItem('AllTextItems', JSON.stringify(allFilesData));
     }
+    fonts.forEach(font => { 
+        if(font.color == "#fdff70"){
+            font.color = "#00BDC3";
+        }
+    });
     openPopup();
     renderer();
     animatToast("File saved !", "rgb(175, 255, 206)");
@@ -235,6 +332,31 @@ function renderer() {
     let AllTextItems = JSON.parse(localStorage.getItem('AllTextItems'));
     let Str = '<option value="select"> Select file </option>';
     let i=1;
+
+    //To set theme
+    const content = document.querySelector('.content');
+    const fonts = document.querySelectorAll('font');
+    if(localStorage.getItem('ThemeOfTestApp')==null);
+    else if(localStorage.getItem('ThemeOfTestApp') == 'Light'){
+        document.querySelector('header').classList.add('light')
+        content.classList.add('light');
+        fonts.forEach(font => {
+            if(font.color == "#fdff70"){
+                font.color = "#00BDC3";
+            }
+        });
+    }
+    else if(localStorage.getItem('ThemeOfTestApp') == 'Dark'){
+        document.querySelector('header').classList.remove('light')
+        content.classList.remove('light');
+        fonts.forEach(font => { 
+            if(font.color == "#00BDC3"){
+                font.color = "#fdff70";
+            }
+        });
+    }
+
+    //To Add select options and content of content window.
     if(localStorage.getItem('AllTextItems')==null){
         let allFilesData = {
         
@@ -247,9 +369,8 @@ function renderer() {
     for (let index = 1; index < i; index++) {
         const element = AllTextItems[index].name;
         Str = Str.concat(`<option value="${element}"> ${element}</option>`);
-    }
+    } 
     
     document.getElementById('textItems').innerHTML = Str;
 }
-
 renderer();

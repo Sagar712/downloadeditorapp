@@ -3,7 +3,7 @@
     "short_name":"Edit app",
     "start_url":".",
     "background_color":"rgb(0, 119, 119)",
-    "theme_color":"aqua",
+    "theme_color":"rgb(0, 119, 119)",
     "display":"standalone",
     "icons":[
         {

@@ -10,6 +10,8 @@ if("serviceWorker" in navigator){
 }
 
 
+//rgb(177, 0, 0)  #9D0000
+
 
 let num1 = 0;
 function popupmenu() {
@@ -50,20 +52,21 @@ function changeMode() {
         localStorage.setItem('ThemeOfTestApp', 'Light');
         fonts.forEach(font => {
             if(font.color == "#fdff70"){
-                font.color = "#00BDC3";
+                font.color = "#9D0000";
             }
         });
     }
     else{
         localStorage.setItem('ThemeOfTestApp', 'Dark');
         fonts.forEach(font => { 
-            if(font.color == "#00BDC3"){
+            if(font.color == "#9D0000"){
                 font.color = "#fdff70";
             }
         });
     }
     console.log(localStorage.getItem('ThemeOfTestApp'));
     popupmenu();
+    ThemeSetter();
 }
 
 function ThemeSetter() {
@@ -75,7 +78,7 @@ function ThemeSetter() {
         content.classList.add('light');
         fonts.forEach(font => {
             if(font.color == "#fdff70"){
-                font.color = "#00BDC3";
+                font.color = "#9D0000";
             }
         });
     }
@@ -83,7 +86,7 @@ function ThemeSetter() {
         document.querySelector('header').classList.remove('light')
         content.classList.remove('light');
         fonts.forEach(font => { 
-            if(font.color == "#00BDC3"){
+            if(font.color == "#9D0000"){
                 font.color = "#fdff70";
             }
         });
@@ -190,7 +193,7 @@ allbtns.forEach(butn => {
         let colorOfPallete = "#fdff70";
         let colorOfFont = "white";
         if(localStorage.getItem('ThemeOfTestApp') == 'Light'){
-            colorOfPallete = "#00BDC3"
+            colorOfPallete = "#9D0000";
             colorOfFont = "black";
         }
         if(command == 'foreColor'){
@@ -200,11 +203,10 @@ allbtns.forEach(butn => {
                 color = 1;
             }
             else{
-                document.execCommand(command, false, colorOfPallete);
+                document.execCommand(command, false, colorOfFont);
                 butn.style.color = colorOfFont;
                 color = 0;
             }
-            
         }
         else if(command == 'fontSize'){
             
@@ -265,17 +267,13 @@ function closeSpecific2() {
 function savedata() {
     const fonts = document.querySelectorAll('font');
     fonts.forEach(font => { 
-        if(font.color == "#00BDC3"){
+        if(font.color == "#9D0000"){
             font.color = "#fdff70";
         }
     });
     const source = document.querySelector('.content').innerHTML;
     localStorage.setItem('textData', source);
-    fonts.forEach(font => { 
-        if(font.color == "#fdff70"){
-            font.color = "#00BDC3";
-        }
-    });
+    
     openPopup();
     animatToast("Temp file saved !", "rgb(175, 255, 206)");
     renderer()
@@ -284,7 +282,7 @@ function savedata() {
 function saveSpecificData() {
     const fonts = document.querySelectorAll('font');
     fonts.forEach(font => { 
-        if(font.color == "#00BDC3"){
+        if(font.color == "#9D0000"){
             font.color = "#fdff70";
         }
     });
@@ -316,11 +314,7 @@ function saveSpecificData() {
         console.log(allFilesData);
         localStorage.setItem('AllTextItems', JSON.stringify(allFilesData));
     }
-    fonts.forEach(font => { 
-        if(font.color == "#fdff70"){
-            font.color = "#00BDC3";
-        }
-    });
+    
     openPopup();
     renderer();
     animatToast("File saved !", "rgb(175, 255, 206)");
@@ -342,7 +336,7 @@ function renderer() {
         content.classList.add('light');
         fonts.forEach(font => {
             if(font.color == "#fdff70"){
-                font.color = "#00BDC3";
+                font.color = "#9D0000";
             }
         });
     }
@@ -350,7 +344,7 @@ function renderer() {
         document.querySelector('header').classList.remove('light')
         content.classList.remove('light');
         fonts.forEach(font => { 
-            if(font.color == "#00BDC3"){
+            if(font.color == "#9D0000"){
                 font.color = "#fdff70";
             }
         });
